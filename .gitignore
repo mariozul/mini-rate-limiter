@@ -1,0 +1,34 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Compiled service binary
+/grpc
+/bin/
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.out
+
+# Dependency directories (uncomment to include)
+vendor/
+
+# IDE / editor
+.idea/
+.vscode/
+.vscode/launch.json
+
+# OS generated files
+.DS_Store
+
+# local environment configuration
+.env
+
+# migrate CLI binary (downloaded locally)
+migrate

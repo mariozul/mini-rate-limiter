@@ -1,0 +1,49 @@
+name: delete-old-branches
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  delete_old_branches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetching git granches
+        run: | 
+          echo "fetching branches.."
+          git fetch 
+        
+      - name: List merged branches
+        run: |
+          git branch -r --merged | grep -v develop | while read -r branch; do
+              echo "${branch#origin/}"
+          done > merged_branches.txt
+
+      - name: Delete merged branches
+        run: |
+          cat merged_branches.txt | while read -r branch; do
+            echo "deleting $branch"
+            git push origin --delete "$branch"
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+
+      - name: List old branches
+        run: |
+          git branch -r | grep -v develop | while read -r branch; do
+            if [[ -z "$(git log -1 --since='3 months ago' -s --pretty=format:"%cd" "$branch")" ]]; then
+              echo "${branch#origin/}"
+            fi
+          done > old_branches.txt
+
+      - name: Delete old branches
+        run: |
+          cat old_branches.txt | while read -r branch; do
+            echo "deleting $branch"
+            git push origin --delete "$branch"
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}

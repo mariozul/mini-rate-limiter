@@ -1,0 +1,103 @@
+# astro-boilerplate config — copy this to config.yaml at the repo root and
+# adjust per-environment. config.yaml is the canonical source of truth.
+#
+# Any key can be overridden by an environment variable at runtime using the
+# convention `section.field` → `SECTION_FIELD` (nested keys join with
+# underscores). For example:
+#   postgres.master.address                → POSTGRES_MASTER_ADDRESS
+#   grpc_service.account.timeout_sec       → GRPC_SERVICE_ACCOUNT_TIMEOUT_SEC
+#   pubsub.vendor_events_subscription_id   → PUBSUB_VENDOR_EVENTS_SUBSCRIPTION_ID
+#
+# Use env overrides for secrets and per-environment endpoints; keep the
+# committed YAML restricted to non-sensitive defaults.
+
+app:
+  name: astro-boilerplate          # surfaces in logs + Datadog service tag
+
+http:
+  addr: ":8080"                    # /metrics Prometheus endpoint
+
+grpc:
+  addr: ":5555"                    # gRPC server bind address
+  read_timeout_sec: 30
+  write_timeout_sec: 30
+  enable_reflection: false         # true only for grpcurl / local debug
+
+log:
+  level: debug                     # one of: debug | info | warn | error
+
+datadog:
+  agent_addr: 127.0.0.1:8126       # APM agent host:port
+
+# Postgres. Credential-bearing DSNs are injected at runtime by the infra
+# team via env vars — POSTGRES_MASTER_DSN and POSTGRES_SLAVE_DSN. They MUST
+# stay empty in the committed YAML; startup fails fast (validateMandatory)
+# if neither YAML nor env provides them. The service only owns pool tuning
+# below.
+postgres:
+  master:
+    dsn: ""                          # injected via POSTGRES_MASTER_DSN
+    max_open: 25                     # max concurrent open connections
+    max_idle: 10                     # max idle in pool (silently capped to max_open)
+    idle_timeout_sec: 300            # close idle conns after 5 min
+    max_lifetime_sec: 1800           # recycle conns after 30 min (covers infra rotation)
+  slave:
+    dsn: ""                          # injected via POSTGRES_SLAVE_DSN
+    max_open: 25
+    max_idle: 10
+    idle_timeout_sec: 300
+    max_lifetime_sec: 1800
+
+# Optional. URL carries host, password, database number, and TLS scheme
+# (`rediss://...`). Injected at runtime via REDIS_URL — empty in the YAML.
+# Empty URL ⇒ NoOp distributed lock. Pool / timeout knobs below are
+# service-owned; zero values fall through to go-redis defaults
+# (PoolSize = 10*NumCPU, ConnMaxIdleTime = 30m, etc.).
+redis:
+  url: ""                            # injected via REDIS_URL (optional)
+  pool_size: 100
+  min_idle_conns: 10
+  max_idle_conns: 30
+  conn_max_idle_time_sec: 1800       # close idle conns after 30 min
+  conn_max_lifetime_sec: 0           # 0 ⇒ never recycle (default)
+  pool_timeout_sec: 4                # wait up to 4s for a free conn
+  dial_timeout_sec: 5
+  read_timeout_sec: 3
+  write_timeout_sec: 3
+
+# Optional. URI carries hosts, credentials, replica-set, authSource, TLS.
+# Injected at runtime via MONGO_URI — empty in the YAML. Empty URI ⇒ NoOp
+# audit-log writer. `database` is the application's choice of database
+# within the cluster (not credential-bearing) so it lives in the YAML.
+# Pool knobs are service-owned; zero ⇒ mongo-driver defaults
+# (MaxPoolSize 100, MinPoolSize 0, no idle limit, 30s connect, 30s selection).
+mongo:
+  uri: ""                            # injected via MONGO_URI (optional)
+  database: astro_boilerplate
+  max_pool_size: 100
+  min_pool_size: 5
+  max_conn_idle_time_sec: 300        # close idle conns after 5 min
+  connect_timeout_sec: 10            # bound the initial handshake
+  server_selection_timeout_sec: 10   # latency budget for routing each op
+
+# External upstream gRPC services. Each entry is dialed once at startup
+# (see internal/infrastructure/external/grpc_dialer.go) and shared across
+# every adapter that calls into that upstream.
+#
+# The `boilerplate` entry is an example slot. Empty addr ⇒ the example
+# external client is skipped at startup. Concrete services rename this
+# entry per real upstream and add as many entries as they need.
+grpc_service:
+  boilerplate:
+    addr: ""                          # e.g. "astro-foo-be-grpc-svc.dev-app.astronauts.id:443"
+    tls: true
+    timeout_sec: 10
+
+gcp:
+  project_id: dogwood-wharf-316804   # GCP project for Pub/Sub clients
+
+# Optional. Empty vendor_events_subscription_id ⇒ inbound subscriber disabled;
+# the outbound publisher (vendor.created / vendors.activated) is unaffected and
+# stays gated by gcp.project_id above.
+pubsub:
+  vendor_events_subscription_id: ""

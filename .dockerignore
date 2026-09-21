@@ -1,0 +1,27 @@
+# Build-time / VCS artifacts the builder doesn't need. Keeping the build
+# context minimal speeds up `docker build` (BuildKit ships fewer bytes to
+# the daemon) and keeps source-only layers from bouncing the cache.
+.git/
+.github/
+.idea/
+.vscode/
+.claude/
+
+# Local build outputs / coverage artifacts
+grpc
+*.test
+*.out
+coverage.txt
+
+# Documentation and proposals — not needed inside the image
+openspec/
+README.md
+
+# Dockerfile metadata
+Dockerfile*
+.dockerignore
+docker-compose.yaml
+
+# Editor scratch
+*.swp
+.DS_Store

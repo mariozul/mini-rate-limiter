@@ -1,0 +1,23 @@
+linters:
+  enable:
+    # enabled by default
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+
+    # enabled linter that by default disabled
+
+    # performance linters
+    - bodyclose # Checks whether HTTP response body is closed successfully.
+    - sqlclosecheck # Checks that sql.Rows, sql.Stmt, sqlx.NamedStmt, pgx.Query are closed.
+    - rowserrcheck # Checks whether Rows.Err of rows is checked successfully.
+    - prealloc # Finds slice declarations that could potentially be pre-allocated.
+
+    # Bugs finders
+    - durationcheck # Check for two durations multiplied together.
+    - gocritic # Catches many subtle issues
+    - nilerr # Finds the code that returns nil even if it checks that the error is not nil.
+    - unparam # Reports unused function parameters.

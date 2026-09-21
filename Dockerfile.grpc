@@ -1,0 +1,65 @@
+# Multi-stage build for the gRPC binary. Three stages:
+#   1. deps  — installs git, configures GitHub auth, downloads Go modules.
+#              Cached unless go.mod/go.sum change.
+#   2. build — compiles a stripped static binary. Source-file changes only
+#              invalidate this stage; the module download in stage 1 is
+#              still cached at the layer level.
+#   3. final — distroless runtime image, ships only the binary + config.yaml.
+
+FROM golang:1.26 AS deps
+
+# Install git for fetching private Go modules from github.com/astronautsid.
+# --no-install-recommends and the apt-list cleanup keep the layer small.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+ARG GITHUB_TOKEN
+
+# Rewrite git URLs for the astronautsid org so `go mod download` can fetch
+# private modules over HTTPS with the personal access token.
+RUN git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/astronautsid".insteadOf "https://github.com/astronautsid"
+
+# Copy ONLY dependency manifests first. This layer is invalidated only when
+# go.mod or go.sum changes — independent of source-file churn.
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+FROM deps AS build
+
+# Copy the rest of the source. Source changes do NOT bust the deps layer
+# above; only this stage rebuilds.
+COPY . .
+
+# Build a stripped, static binary.
+#   -trimpath:        removes local filesystem paths from the binary
+#                     (reproducibility + smaller).
+#   -ldflags '-s -w': drops the symbol table and DWARF debug info (~30%
+#                     smaller binary).
+#   CGO_ENABLED=0:    produces a fully static binary that runs on distroless
+#                     without glibc.
+RUN CGO_ENABLED=0 GOOS=linux go build \
+        -trimpath \
+        -ldflags='-s -w' \
+        -o /grpc ./cmd/grpc
+
+# Final runtime image. Distroless ships /etc/passwd + ca-certificates only;
+# no shell, no package manager. Smallest possible attack surface.
+FROM asia-southeast2-docker.pkg.dev/dogwood-wharf-316804/base-image/distroless-go
+
+WORKDIR /app
+
+COPY --from=build /grpc /app/grpc
+
+# Bake the committed template as the runtime config.yaml. The binary's
+# working directory at runtime is /app, so viper's "." search path in
+# internal/config/config.go resolves /app/config.yaml without further
+# configuration. Per-environment overrides (especially credential-bearing
+# DSN/URL/URI fields, which the template leaves empty) must be set as
+# environment variables by infra at deploy time.
+COPY --from=build /app/config.yml.example /app/config.yaml
+
+CMD ["/app/grpc"]
