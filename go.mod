@@ -1,6 +1,6 @@
 module github.com/mariozul/mini-rate-limiter
 
-go 1.24.0
+go 1.26.0
 
 require (
 	cloud.google.com/go/pubsub/v2 v2.6.0
