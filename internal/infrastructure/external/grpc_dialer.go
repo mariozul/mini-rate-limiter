@@ -19,7 +19,7 @@ import (
 	"time"
 
 	golibsgrpc "github.com/astronautsid/astro-golibs/grpc/util"
-	"github.com/astronautsid/astro-boilerplate/internal/config"
+	"github.com/mariozul/mini-rate-limiter/internal/config"
 	"google.golang.org/grpc"
 )
 

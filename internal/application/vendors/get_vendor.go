@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	pkgerr "github.com/astronautsid/astro-boilerplate/pkg/errors"
+	pkgerr "github.com/mariozul/mini-rate-limiter/pkg/errors"
 )
 
 // GetVendorQuery is the input DTO for the GetVendor use case.

@@ -6,8 +6,8 @@ package vendors
 import (
 	"time"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/entity"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/valueobject"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/entity"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/valueobject"
 )
 
 // Model is the row-level projection of the `vendors` Postgres table. It is the

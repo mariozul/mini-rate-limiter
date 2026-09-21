@@ -7,7 +7,7 @@ import (
 	"context"
 	"fmt"
 
-	appvendors "github.com/astronautsid/astro-boilerplate/internal/application/vendors"
+	appvendors "github.com/mariozul/mini-rate-limiter/internal/application/vendors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )

@@ -12,8 +12,8 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/astronautsid/astro-boilerplate/internal/application/vendors"
-	"github.com/astronautsid/astro-boilerplate/internal/interface/grpc/grpcerr"
+	"github.com/mariozul/mini-rate-limiter/internal/application/vendors"
+	"github.com/mariozul/mini-rate-limiter/internal/interface/grpc/grpcerr"
 	logger "github.com/astronautsid/astro-golibs/logger"
 	erppb "github.com/astronautsid/astro-proto/golang/pb/erp"
 )

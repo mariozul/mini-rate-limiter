@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	event "github.com/astronautsid/astro-boilerplate/internal/domain/event"
+	event "github.com/mariozul/mini-rate-limiter/internal/domain/event"
 	gomock "go.uber.org/mock/gomock"
 )
 

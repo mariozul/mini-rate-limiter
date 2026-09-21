@@ -1,4 +1,4 @@
-module github.com/astronautsid/astro-boilerplate
+module github.com/mariozul/mini-rate-limiter
 
 go 1.26.0
 

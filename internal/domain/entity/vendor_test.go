@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/entity"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/valueobject"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/entity"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/valueobject"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

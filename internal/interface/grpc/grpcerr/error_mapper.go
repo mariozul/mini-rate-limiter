@@ -7,8 +7,8 @@ package grpcerr
 import (
 	stderrors "errors"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/entity"
-	pkgerr "github.com/astronautsid/astro-boilerplate/pkg/errors"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/entity"
+	pkgerr "github.com/mariozul/mini-rate-limiter/pkg/errors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

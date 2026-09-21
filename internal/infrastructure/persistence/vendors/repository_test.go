@@ -8,9 +8,9 @@ import (
 	"time"
 
 	sqlmock "github.com/DATA-DOG/go-sqlmock"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/entity"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/valueobject"
-	pkgerr "github.com/astronautsid/astro-boilerplate/pkg/errors"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/entity"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/valueobject"
+	pkgerr "github.com/mariozul/mini-rate-limiter/pkg/errors"
 	"github.com/astronautsid/astro-golibs/safesql"
 	"github.com/stretchr/testify/require"
 )

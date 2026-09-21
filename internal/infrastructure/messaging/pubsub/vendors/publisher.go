@@ -19,8 +19,8 @@ import (
 	erppb "github.com/astronautsid/astro-proto/golang/pb/erp"
 	"google.golang.org/protobuf/proto"
 
-	appvendors "github.com/astronautsid/astro-boilerplate/internal/application/vendors"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/event"
+	appvendors "github.com/mariozul/mini-rate-limiter/internal/application/vendors"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/event"
 )
 
 // pubsubService is the structural surface of astro-golibs/pubsub's

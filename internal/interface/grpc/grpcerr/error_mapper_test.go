@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/entity"
-	"github.com/astronautsid/astro-boilerplate/internal/interface/grpc/grpcerr"
-	pkgerr "github.com/astronautsid/astro-boilerplate/pkg/errors"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/entity"
+	"github.com/mariozul/mini-rate-limiter/internal/interface/grpc/grpcerr"
+	pkgerr "github.com/mariozul/mini-rate-limiter/pkg/errors"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

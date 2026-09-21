@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	appvendors "github.com/astronautsid/astro-boilerplate/internal/application/vendors"
+	appvendors "github.com/mariozul/mini-rate-limiter/internal/application/vendors"
 )
 
 // NoOpLock implements DistributedLock without contacting any external service.

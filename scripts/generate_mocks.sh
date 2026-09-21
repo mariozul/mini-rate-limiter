@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# generate_mocks.sh — regenerate all gomock-based mocks for astro-boilerplate.
+# generate_mocks.sh — regenerate all gomock-based mocks for mini-rate-limiter.
 #
 # Conventions:
 #   - Mocks live next to the consumer in a mocks/ sub-package named

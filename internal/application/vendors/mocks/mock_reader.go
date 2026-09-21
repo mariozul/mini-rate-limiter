@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	vendors "github.com/astronautsid/astro-boilerplate/internal/application/vendors"
-	pagination "github.com/astronautsid/astro-boilerplate/pkg/pagination"
+	vendors "github.com/mariozul/mini-rate-limiter/internal/application/vendors"
+	pagination "github.com/mariozul/mini-rate-limiter/pkg/pagination"
 	gomock "go.uber.org/mock/gomock"
 )
 

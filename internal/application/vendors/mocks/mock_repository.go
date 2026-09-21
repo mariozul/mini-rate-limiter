@@ -13,8 +13,8 @@ import (
 	context "context"
 	reflect "reflect"
 
-	vendors "github.com/astronautsid/astro-boilerplate/internal/application/vendors"
-	entity "github.com/astronautsid/astro-boilerplate/internal/domain/entity"
+	vendors "github.com/mariozul/mini-rate-limiter/internal/application/vendors"
+	entity "github.com/mariozul/mini-rate-limiter/internal/domain/entity"
 	gomock "go.uber.org/mock/gomock"
 )
 

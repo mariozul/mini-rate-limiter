@@ -1,4 +1,4 @@
-# astro-boilerplate
+# mini-rate-limiter
 
 Go service scaffold for new astronautsid backend services. Combines Clean Architecture's layered code layout with DDD's rich domain modeling. gRPC-first; ships with Postgres read/write split, optional Redis, optional Mongo, optional GCP Pub/Sub, and Datadog APM wired by default.
 
@@ -228,11 +228,6 @@ wires the concrete value through without anyone having to name it.
 
 ## Creating a new service from this template
 
-<!-- TEMPLATE-ONLY-START -->
-On GitHub, click **Use this template → Create a new repository**. The mechanical renames are then handled automatically — on your first push to `develop`, [`.github/workflows/template-cleanup.yml`](.github/workflows/template-cleanup.yml) rewrites the Go module path, every Go import, `app.name` and `mongo.database` in [config.yml.example](config.yml.example), the sonar keys in [sonar.properties](sonar.properties), and the README title; commits the result as `github-actions[bot]`; and deletes itself so it never runs again. If your default branch is something other than `develop`, trigger the workflow once from the Actions tab.
-
-If the auto-workflow can't push (protected `develop` branch, signed-commit policy, etc.), the renames it performs are the same find/replace this README used to describe — you can run them locally and commit yourself; see the workflow file for the exact `sed` commands.
-<!-- TEMPLATE-ONLY-END -->
 
 What remains manual after the rename:
 

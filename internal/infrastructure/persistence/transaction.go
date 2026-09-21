@@ -3,7 +3,7 @@ package persistence
 import (
 	"context"
 
-	"github.com/astronautsid/astro-boilerplate/internal/application/vendors"
+	"github.com/mariozul/mini-rate-limiter/internal/application/vendors"
 	"github.com/astronautsid/astro-golibs/safesql"
 	"github.com/jmoiron/sqlx"
 )

@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/astronautsid/astro-boilerplate/internal/config"
+	"github.com/mariozul/mini-rate-limiter/internal/config"
 	"github.com/redis/go-redis/v9"
 )
 

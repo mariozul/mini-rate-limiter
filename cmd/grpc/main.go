@@ -1,4 +1,4 @@
-// Package main is the composition root for the astro-boilerplate gRPC service.
+// Package main is the composition root for the mini-rate-limiter gRPC service.
 //
 // Every adapter is constructed exactly once here and threaded through the
 // application via constructor injection. main.go owns the lifecycle of every
@@ -51,22 +51,22 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"google.golang.org/grpc"
 
-	"github.com/astronautsid/astro-boilerplate/internal/application/vendors"
-	"github.com/astronautsid/astro-boilerplate/internal/config"
-	"github.com/astronautsid/astro-boilerplate/internal/infrastructure/cache"
-	"github.com/astronautsid/astro-boilerplate/internal/infrastructure/external"
-	extboilerplate "github.com/astronautsid/astro-boilerplate/internal/infrastructure/external/boilerplate"
-	messagingpubsub "github.com/astronautsid/astro-boilerplate/internal/infrastructure/messaging/pubsub"
-	vendorpub "github.com/astronautsid/astro-boilerplate/internal/infrastructure/messaging/pubsub/vendors"
-	"github.com/astronautsid/astro-boilerplate/internal/infrastructure/mongodb"
-	"github.com/astronautsid/astro-boilerplate/internal/infrastructure/mongodb/vendor_audit"
-	"github.com/astronautsid/astro-boilerplate/internal/infrastructure/persistence"
-	vendorrepo "github.com/astronautsid/astro-boilerplate/internal/infrastructure/persistence/vendors"
-	grpc_interface "github.com/astronautsid/astro-boilerplate/internal/interface/grpc"
-	healthv1 "github.com/astronautsid/astro-boilerplate/internal/interface/grpc/handler/health/v1"
-	vendorv1 "github.com/astronautsid/astro-boilerplate/internal/interface/grpc/handler/vendors/v1"
-	vendoreventsv1 "github.com/astronautsid/astro-boilerplate/internal/interface/pubsub/vendors/v1"
-	"github.com/astronautsid/astro-boilerplate/pkg/shutdown"
+	"github.com/mariozul/mini-rate-limiter/internal/application/vendors"
+	"github.com/mariozul/mini-rate-limiter/internal/config"
+	"github.com/mariozul/mini-rate-limiter/internal/infrastructure/cache"
+	"github.com/mariozul/mini-rate-limiter/internal/infrastructure/external"
+	extboilerplate "github.com/mariozul/mini-rate-limiter/internal/infrastructure/external/boilerplate"
+	messagingpubsub "github.com/mariozul/mini-rate-limiter/internal/infrastructure/messaging/pubsub"
+	vendorpub "github.com/mariozul/mini-rate-limiter/internal/infrastructure/messaging/pubsub/vendors"
+	"github.com/mariozul/mini-rate-limiter/internal/infrastructure/mongodb"
+	"github.com/mariozul/mini-rate-limiter/internal/infrastructure/mongodb/vendor_audit"
+	"github.com/mariozul/mini-rate-limiter/internal/infrastructure/persistence"
+	vendorrepo "github.com/mariozul/mini-rate-limiter/internal/infrastructure/persistence/vendors"
+	grpc_interface "github.com/mariozul/mini-rate-limiter/internal/interface/grpc"
+	healthv1 "github.com/mariozul/mini-rate-limiter/internal/interface/grpc/handler/health/v1"
+	vendorv1 "github.com/mariozul/mini-rate-limiter/internal/interface/grpc/handler/vendors/v1"
+	vendoreventsv1 "github.com/mariozul/mini-rate-limiter/internal/interface/pubsub/vendors/v1"
+	"github.com/mariozul/mini-rate-limiter/pkg/shutdown"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
@@ -94,7 +94,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("logger init: %v", err)
 	}
-	appLog.Info("starting astro-boilerplate gRPC service")
+	appLog.Info("starting mini-rate-limiter gRPC service")
 
 	// --- Step 3. Signal context + shutdown manager ------------------------
 	// signal.NotifyContext returns a ctx that cancels on SIGTERM/SIGINT,
@@ -388,7 +388,7 @@ func main() {
 		appLog.Error(fmt.Sprintf("shutdown completed with errors: %v", err))
 		exitCode = 1
 	}
-	appLog.Info("astro-boilerplate gRPC service stopped")
+	appLog.Info("mini-rate-limiter gRPC service stopped")
 	if exitCode != 0 {
 		// log.Fatal would skip the manager we just ran; we already ran it,
 		// so just signal the exit code to the harness.

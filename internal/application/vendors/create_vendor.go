@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/entity"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/event"
-	pkgerr "github.com/astronautsid/astro-boilerplate/pkg/errors"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/entity"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/event"
+	pkgerr "github.com/mariozul/mini-rate-limiter/pkg/errors"
 )
 
 // CreateVendorCommand is the input DTO for the CreateVendor use case.

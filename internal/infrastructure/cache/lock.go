@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	appvendors "github.com/astronautsid/astro-boilerplate/internal/application/vendors"
+	appvendors "github.com/mariozul/mini-rate-limiter/internal/application/vendors"
 	"github.com/redis/go-redis/v9"
 )
 

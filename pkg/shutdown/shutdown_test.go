@@ -8,7 +8,7 @@ import (
 	"time"
 
 	golibslogger "github.com/astronautsid/astro-golibs/logger"
-	"github.com/astronautsid/astro-boilerplate/pkg/shutdown"
+	"github.com/mariozul/mini-rate-limiter/pkg/shutdown"
 	"github.com/stretchr/testify/require"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
 )

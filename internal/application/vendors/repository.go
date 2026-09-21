@@ -3,7 +3,7 @@ package vendors
 import (
 	"context"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/entity"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/entity"
 )
 
 // Repository persists and loads Vendor aggregates. Implementations live in

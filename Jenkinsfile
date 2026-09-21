@@ -1,4 +1,4 @@
-// CI pipeline for astro-boilerplate. Mirrors the standard astronautsid Go
+// CI pipeline for mini-rate-limiter. Mirrors the standard astronautsid Go
 // service shape: SAST (Semgrep) → Build/Test → Security scan (Gosec) →
 // SonarQube + Quality Gate. Runs on a Kubernetes agent with one container
 // per tool so heavy images don't block the pipeline pod startup time.

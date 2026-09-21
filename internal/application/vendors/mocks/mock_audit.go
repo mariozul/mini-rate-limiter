@@ -13,7 +13,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	vendors "github.com/astronautsid/astro-boilerplate/internal/application/vendors"
+	vendors "github.com/mariozul/mini-rate-limiter/internal/application/vendors"
 	gomock "go.uber.org/mock/gomock"
 )
 

@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/astronautsid/astro-boilerplate/internal/application/vendors"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/entity"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/event"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/valueobject"
-	pkgerr "github.com/astronautsid/astro-boilerplate/pkg/errors"
+	"github.com/mariozul/mini-rate-limiter/internal/application/vendors"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/entity"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/event"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/valueobject"
+	pkgerr "github.com/mariozul/mini-rate-limiter/pkg/errors"
 	"github.com/stretchr/testify/require"
 )
 

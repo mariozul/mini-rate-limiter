@@ -5,9 +5,9 @@ import (
 	stderrors "errors"
 	"testing"
 
-	"github.com/astronautsid/astro-boilerplate/internal/application/vendors"
-	"github.com/astronautsid/astro-boilerplate/internal/domain/entity"
-	pkgerr "github.com/astronautsid/astro-boilerplate/pkg/errors"
+	"github.com/mariozul/mini-rate-limiter/internal/application/vendors"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/entity"
+	pkgerr "github.com/mariozul/mini-rate-limiter/pkg/errors"
 	erppb "github.com/astronautsid/astro-proto/golang/pb/erp"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"

@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/astronautsid/astro-boilerplate/internal/config"
+	"github.com/mariozul/mini-rate-limiter/internal/config"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )

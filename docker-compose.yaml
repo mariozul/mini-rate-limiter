@@ -7,9 +7,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: astro_boilerplate
-      POSTGRES_PASSWORD: astro_boilerplate
-      POSTGRES_DB: astro_boilerplate
+      POSTGRES_USER: mini_rate_limiter
+      POSTGRES_PASSWORD: mini_rate_limiter
+      POSTGRES_DB: mini_rate_limiter
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -25,8 +25,8 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: astro_boilerplate
-      MONGO_INITDB_ROOT_PASSWORD: astro_boilerplate
+      MONGO_INITDB_ROOT_USERNAME: mini_rate_limiter
+      MONGO_INITDB_ROOT_PASSWORD: mini_rate_limiter
     volumes:
       - mongo_data:/data/db
 

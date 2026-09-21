@@ -1,4 +1,4 @@
-# astro-boilerplate config — copy this to config.yaml at the repo root and
+# mini-rate-limiter config — copy this to config.yaml at the repo root and
 # adjust per-environment. config.yaml is the canonical source of truth.
 #
 # Any key can be overridden by an environment variable at runtime using the
@@ -12,7 +12,7 @@
 # committed YAML restricted to non-sensitive defaults.
 
 app:
-  name: astro-boilerplate          # surfaces in logs + Datadog service tag
+  name: mini-rate-limiter          # surfaces in logs + Datadog service tag
 
 http:
   addr: ":8080"                    # /metrics Prometheus endpoint
@@ -73,7 +73,7 @@ redis:
 # (MaxPoolSize 100, MinPoolSize 0, no idle limit, 30s connect, 30s selection).
 mongo:
   uri: ""                            # injected via MONGO_URI (optional)
-  database: astro_boilerplate
+  database: mini_rate_limiter
   max_pool_size: 100
   min_pool_size: 5
   max_conn_idle_time_sec: 300        # close idle conns after 5 min

@@ -3,7 +3,7 @@ package vendors
 import (
 	"context"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/event"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/event"
 )
 
 // NotificationService dispatches vendor-related notifications (e.g., FCM,

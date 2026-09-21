@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/astronautsid/astro-boilerplate/pkg/pagination"
+	"github.com/mariozul/mini-rate-limiter/pkg/pagination"
 )
 
 // ListFilter narrows a vendor list query. Empty fields are ignored.

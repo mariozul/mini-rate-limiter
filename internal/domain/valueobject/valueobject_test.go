@@ -3,7 +3,7 @@ package valueobject_test
 import (
 	"testing"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/valueobject"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/valueobject"
 	"github.com/stretchr/testify/require"
 )
 

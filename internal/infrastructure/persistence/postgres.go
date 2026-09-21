@@ -11,7 +11,7 @@ package persistence
 import (
 	"fmt"
 
-	"github.com/astronautsid/astro-boilerplate/internal/config"
+	"github.com/mariozul/mini-rate-limiter/internal/config"
 	"github.com/astronautsid/astro-golibs/safesql"
 )
 

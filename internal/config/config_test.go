@@ -85,7 +85,7 @@ func TestLoad_ParsesExampleYAML(t *testing.T) {
 
 	cfg := loadFromExample(t)
 
-	require.Equal(t, "astro-boilerplate", cfg.App.Name)
+	require.Equal(t, "mini-rate-limiter", cfg.App.Name)
 	require.Equal(t, ":8080", cfg.Http.Addr)
 	require.Equal(t, ":5555", cfg.Grpc.Addr)
 	require.Equal(t, 30, cfg.Grpc.ReadTimeoutSec)
@@ -111,7 +111,7 @@ func TestLoad_ParsesExampleYAML(t *testing.T) {
 	require.Equal(t, 3, cfg.Redis.WriteTimeoutSec)
 
 	require.Equal(t, devMongoURI, cfg.Mongo.URI, "Mongo URI comes from env, not YAML")
-	require.Equal(t, "astro_boilerplate", cfg.Mongo.Database)
+	require.Equal(t, "mini_rate_limiter", cfg.Mongo.Database)
 	require.Equal(t, uint64(100), cfg.Mongo.MaxPoolSize)
 	require.Equal(t, uint64(5), cfg.Mongo.MinPoolSize)
 	require.Equal(t, 300, cfg.Mongo.MaxConnIdleTimeSec)

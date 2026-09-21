@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/event"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/event"
 )
 
 // fakeSvc captures the last Publish call so the test can verify the topic

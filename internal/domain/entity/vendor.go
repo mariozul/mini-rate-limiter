@@ -3,7 +3,7 @@ package entity
 import (
 	"time"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/valueobject"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/valueobject"
 )
 
 // Vendor is the example aggregate root used by the boilerplate. All fields are

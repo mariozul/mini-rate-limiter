@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/astronautsid/astro-boilerplate/internal/domain/event"
+	"github.com/mariozul/mini-rate-limiter/internal/domain/event"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

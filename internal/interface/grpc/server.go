@@ -6,8 +6,8 @@ package grpc
 import (
 	grpctrace "github.com/DataDog/dd-trace-go/contrib/google.golang.org/grpc/v2"
 	golibsmd "github.com/astronautsid/astro-golibs/grpc/metadata"
-	healthv1 "github.com/astronautsid/astro-boilerplate/internal/interface/grpc/handler/health/v1"
-	vendorv1 "github.com/astronautsid/astro-boilerplate/internal/interface/grpc/handler/vendors/v1"
+	healthv1 "github.com/mariozul/mini-rate-limiter/internal/interface/grpc/handler/health/v1"
+	vendorv1 "github.com/mariozul/mini-rate-limiter/internal/interface/grpc/handler/vendors/v1"
 	logger "github.com/astronautsid/astro-golibs/logger"
 	erppb "github.com/astronautsid/astro-proto/golang/pb/erp"
 	"google.golang.org/grpc"
