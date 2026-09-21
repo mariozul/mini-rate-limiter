@@ -82,6 +82,40 @@ func TestRateLimiterLoadtestBypassesRegardlessOfIP(t *testing.T) {
 	}
 }
 
+func TestRateLimiterStatsTracksRequests(t *testing.T) {
+	limiter := NewRateLimiter()
+	req := Request{IP: "192.0.2.1"}
+	for i := 0; i < maxRequests; i++ {
+		if !limiter.Allow(req) {
+			t.Fatalf("request %d was rejected", i+1)
+		}
+	}
+	if limiter.Allow(req) {
+		t.Fatal("request beyond the limit was allowed")
+	}
+	if !limiter.Allow(Request{IP: req.IP, IsLoadtest: true}) {
+		t.Fatal("load-test request was rejected")
+	}
+	want := RateLimiterStats{TotalRequests: 7, TotalBlocked: 1, TotalBypassed: 1}
+	if got := limiter.Stats(); got != want {
+		t.Fatalf("Stats() = %+v, want %+v", got, want)
+	}
+}
+
+func TestRateLimiterStatsIsSafeForConcurrentCalls(t *testing.T) {
+	limiter := NewRateLimiter()
+	var wg sync.WaitGroup
+	for i := 0; i < 100; i++ {
+		wg.Add(1)
+		go func() { defer wg.Done(); limiter.Allow(Request{IsLoadtest: true}) }()
+	}
+	wg.Wait()
+	want := RateLimiterStats{TotalRequests: 100, TotalBypassed: 100}
+	if got := limiter.Stats(); got != want {
+		t.Fatalf("Stats() = %+v, want %+v", got, want)
+	}
+}
+
 func TestRateLimiterIsSafeForConcurrentCalls(t *testing.T) {
 	limiter := NewRateLimiter()
 	var allowed atomic.Int32

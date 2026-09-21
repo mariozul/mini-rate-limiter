@@ -15,10 +15,17 @@ type Request struct {
 	IsLoadtest bool
 }
 
+type RateLimiterStats struct {
+	TotalRequests int64
+	TotalBlocked  int64
+	TotalBypassed int64
+}
+
 type RateLimiter struct {
 	mu      sync.Mutex
 	clients map[string]clientWindow
 	now     func() time.Time
+	stats   RateLimiterStats
 }
 
 type clientWindow struct {
@@ -31,12 +38,14 @@ func NewRateLimiter() *RateLimiter {
 }
 
 func (l *RateLimiter) Allow(req Request) bool {
-	if req.IsLoadtest {
-		return true
-	}
-
 	l.mu.Lock()
 	defer l.mu.Unlock()
+
+	l.stats.TotalRequests++
+	if req.IsLoadtest {
+		l.stats.TotalBypassed++
+		return true
+	}
 
 	if l.clients == nil {
 		l.clients = make(map[string]clientWindow)
@@ -52,10 +61,17 @@ func (l *RateLimiter) Allow(req Request) bool {
 		return true
 	}
 	if client.count >= maxRequests {
+		l.stats.TotalBlocked++
 		return false
 	}
 
 	client.count++
 	l.clients[req.IP] = client
 	return true
+}
+
+func (l *RateLimiter) Stats() RateLimiterStats {
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	return l.stats
 }
